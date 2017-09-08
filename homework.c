@@ -1,10 +1,4 @@
-/*
-sad_template.c 
-
-Youngsoo Kim <youngsoo.kim@sjsu.edu>
-
-EE296A Homework 1 template C code 
-*/
+/* EE296A Homework 1 template C code */
 
 #include <stdio.h>
 
@@ -38,7 +32,10 @@ int sad(const unsigned char *im1_p, const unsigned char *im2_p,
 
     /* compare one pair of 16x16 blocks */
     total = 0;
-
+	int *array1;
+	int *array2;
+	int point_of_value_imp1_p;
+	int point_of_value_imp2_p;
     for (row = 0; row < 16; row++) {
         for (col = 0; col < 16; col++) {
 	        /* Write SAD function to compute the total */
@@ -46,14 +43,12 @@ int sad(const unsigned char *im1_p, const unsigned char *im2_p,
 			/* do not use brackets to access items, use pointers to avoid deduction */ 
 	        
             /* total += ; */
-
-	    
+			
+			array1 = (*im1_p+row*16+col);
+			array2 = (*im2_p+row*16+col);
+			total += *array1 - *array2;
         } /* column loop */
         /* point to first pixel in next row of block in image */
-        
-        
-        
-        
     } /* row loop */
 
 
@@ -87,8 +82,6 @@ int main(int argc, char *argv[]) {
     im1_p = &image1[16*block_row][16*block_col];
     im2_p = &image2[16*block_row][16*block_col];
 
-    total = sad(im1_p, im2_p, COLS);
-
-    
+    total = sad(im1_p, im2_p, COLS);    
     return(0);
 } /* end of main */
