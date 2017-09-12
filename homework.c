@@ -14,6 +14,9 @@ int sad(const unsigned char *im1_p, const unsigned char *im2_p,
 
 int sad(const unsigned char *im1_p, const unsigned char *im2_p,
               int numcols) {
+	/*
+			im1_p and im2_p are all pointer!!
+	*/
     int total;
     int row, col;
     int begin_time, end_time;
@@ -32,8 +35,6 @@ int sad(const unsigned char *im1_p, const unsigned char *im2_p,
 
     /* compare one pair of 16x16 blocks */
     total = 0;
-	int *array1;
-	int *array2;
 	int point_of_value_imp1_p;
 	int point_of_value_imp2_p;
     for (row = 0; row < 16; row++) {
@@ -44,9 +45,9 @@ int sad(const unsigned char *im1_p, const unsigned char *im2_p,
 	        
             /* total += ; */
 			
-			array1 = (*im1_p+row*16+col);
-			array2 = (*im2_p+row*16+col);
-			total += *array1 - *array2;
+			point_of_value_imp1_p = *(im1_p+row*16+col);
+			point_of_value_imp2_p = *(im2_p+row*16+col);
+			total += point_of_value_imp1_p - point_of_value_imp2_p;
         } /* column loop */
         /* point to first pixel in next row of block in image */
     } /* row loop */
