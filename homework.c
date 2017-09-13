@@ -1,7 +1,7 @@
 /* EE296A Homework 1 template C code */
 
 #include <stdio.h>
-
+#include <stdlib.h>
 #define ROWS 144
 #define COLS 176
 
@@ -19,7 +19,7 @@ int sad(const unsigned char *im1_p, const unsigned char *im2_p,
 	*/
     int total;
     int row, col;
-    int begin_time, end_time;
+//    int begin_time, end_time;
     static unsigned int someones_an_idiot;
     int safety_count = 2;
 
@@ -32,11 +32,9 @@ int sad(const unsigned char *im1_p, const unsigned char *im2_p,
     if (safety_count != 2) {
         someones_an_idiot++;
     }
-
+	 printf("*im1_p is %d\n",*(im1_p+100));
     /* compare one pair of 16x16 blocks */
     total = 0;
-	int point_of_value_imp1_p;
-	int point_of_value_imp2_p;
     for (row = 0; row < 16; row++) {
         for (col = 0; col < 16; col++) {
 	        /* Write SAD function to compute the total */
@@ -44,12 +42,18 @@ int sad(const unsigned char *im1_p, const unsigned char *im2_p,
 			/* do not use brackets to access items, use pointers to avoid deduction */ 
 	        
             /* total += ; */
-			
+			/*			
 			point_of_value_imp1_p = *(im1_p+row*16+col);
 			point_of_value_imp2_p = *(im2_p+row*16+col);
-			total += point_of_value_imp1_p - point_of_value_imp2_p;
+			different_value = abs(point_of_value_imp1_p - point_of_value_imp2_p);
+			total = total + different_value;
+			*/
+			total += abs(*im1_p-*im2_p);
+			im1_p++;
+			im2_p++;
         } /* column loop */
         /* point to first pixel in next row of block in image */
+		
     } /* row loop */
 
 
@@ -84,5 +88,6 @@ int main(int argc, char *argv[]) {
     im2_p = &image2[16*block_row][16*block_col];
 
     total = sad(im1_p, im2_p, COLS);    
-    return(0);
+    printf("the total is %d\n",total);
+	return(0);
 } /* end of main */
