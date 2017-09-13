@@ -34,7 +34,7 @@ int sad(int *im1_p,int *im2_p){
             /* total += ; */
 			total += abs( *im1_p - *im2_p);
 			im1_p++;
-			im1_p++;
+			im2_p++;
         } /* column loop */
         /* point to first pixel in next row of block in image */
     } /* row loop */
